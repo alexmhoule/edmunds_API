@@ -1,0 +1,28 @@
+.container {
+	margin: 3em auto;
+	width: 940px;
+}
+
+.center{
+	text-align: center;
+	margin:auto;
+}
+
+.result {
+	border: 1px solid black;
+	padding: 5px;
+	margin: 0 auto 1em auto;
+}
+
+.first-car {
+	margin-top: 2em;
+}
+
+.instructions {
+	margin-top: 2em;
+}
+
+.info {
+	margin-top: 2em;
+}
+
