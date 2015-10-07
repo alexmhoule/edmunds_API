@@ -77,7 +77,7 @@ $('.year').on("change", function() {
 
 $('.styles').on("change", function () {
 	var styleIndex = $(this).find("option:selected").index()-1;
-	styleId = styles[styleIndex].year.id;
+	styleId = styles[styleIndex].make.id;
 	console.log(styleId);
 	loadDetails();
 });
