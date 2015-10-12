@@ -11,92 +11,132 @@
 	<script src="js/bootstrap.js"></script>
 </head>
 <body>
+
+	<div class="site-container">
 	
-	<div class="container">
-		<h1 class="span10 center">My Edmunds API Assignment</h1>
-		<div class="span10 instructions">
-			<p>This application will allow you to look up the specifications of two vehicles to compare using the Edmunds API to retrieve data.</p><ol>
-				<li>Simply select the make of vehicle from the drop down menu.</li>
-				<li>Next the model drop down will appear, select the desired model.</li>
-				<li>Now the vehicle information will display for you to compare</li>
-			</ol>
-			<hr />
-		</div>
-		
+		<div class="container">
+			<h1 class="span10 center">My Edmunds API Assignment</h1>
+			<div class="span10 instructions">
+				<p>This application will allow you to look up the specifications of two vehicles to compare using the Edmunds API to retrieve data.</p><ol>
+					<li>Simply select the make of vehicle from the drop down menu.</li>
+					<li>Next the model drop down will appear, select the desired model.</li>
+					<li>With the make and model selected, you will then select the year of the vehicle.</li>
+					<li>The final step will be selecting the style of that vehicle</li>
+					<li>Now view the data for both vehicles and compare</li>
+				</ol>
+				<hr />
+			</div>
+			
 
-		<!-- First Car !-->
+			<!-- First Car !-->
 
-		<div class="span5 row first-car">
-			<select class="make">
-				<option>Please select a make</option>
-			</select>
-		
-			<select class="model">
-				<option>Please select a model</option>
-			</select>
+			<div class="span5 row first-car">
+				<select class="make">
+					<option>Please select a make</option>
+				</select>
+			
+				<select class="model">
+					<option>Please select a model</option>
+				</select>
 
-			<select class="year">
-				<option>Please select a year</option>
-			</select>
+				<select class="year">
+					<option>Please select a year</option>
+				</select>
 
-			<select class="styles">
-				<option>Please select a style</option>
-			</select>
+				<select class="styles">
+					<option>Please select a style</option>
+				</select>
 
-			<!-- Template !-->
+			<!-- Template Container !-->
 
-			<div class="templates hidden info">
-				<dl class="result car1">
-					<dt class="photo"></dt>
-					<dt class="make">Make:</dt>
-						<dd>Make</dd>
-					<dt class="model">Model:</dt>
-						<dd>Model</dd>
-					<dt class="engine">Engine Information:</dt>
-						<dd class="cylinder">Cylinder</dd>
-						<dd class="size">Size</dd>
-						<dd class="horsepower">Horse Power</dd>
-				</dl>
+			<div class="tempContainer">
 			</div>
 
-		</div>
+				<!-- Template !-->
 
-		<!-- Second Car !-->
+				<div class="templates hidden">
+					<div class="information">
+						<dl class="result car1">
+							<dt class="photo"></dt>
+							<dt>Make:</dt>
+								<dd class="make">Make</dd>
+							<dt>Model:</dt>
+								<dd class="model">Model</dd>
+							<dt>MPG: <br /></dt>
+								<dd><strong>City:</strong>
+									<p class="city">City</p>
+								</dd>
+								<dd><strong>Highway:</strong>
+									<p class="highway">Highway</p>
+								</dd>
+							<dt>Engine Information <br /></dt>
+								<dd><strong>Compression Rate:</strong> 
+									<p class="compression">Rate</p>
+								</dd>
+								<dd><strong>Cylinders:</strong>
+									<p class="cylinder">Cylinder</p>
+								</dd>
+								<dd><strong>Fuel:</strong>
+									<p class="fuel">Fuel type</p>
+								</dd>
+						</dl>
+					</div>
+				</div>
 
-		<div class="span5 row first-car">
-			<select class="make">
-				<option value = null>Select a make</option>
-				<option value="chevrolet">Chevrolet</option>
-				<option value="ford">Ford</option>
-				<option value="toyota">Toyota</option>
-				<option value="honda">Honda</option>
-			</select>
-			<br />
-			<select class="model">
-				<option value = null>Select a model</option>
-				<option value="model 1">Model 1</option>
-				<option value="model 2">Model 2</option>
-				<option value="model 3">Model 3</option>
-				<option value="model 4">Model 4</option>
-			</select>
-
-			<!-- Template !-->
-
-			<div class="templates hidden info">
-				<dl class="result car1">
-					<dt class="photo"></dt>
-					<dt class="make">Make:</dt>
-						<dd>Make</dd>
-					<dt class="model">Model:</dt>
-						<dd>Model</dd>
-					<dt class="engine">Engine Information:</dt>
-						<dd class="cylinder">Cylinder</dd>
-						<dd class="size">Size</dd>
-						<dd class="horsepower">Horse Power</dd>
-				</dl>
 			</div>
 
+			<!-- Second Car !-->
+
+			<div class="span5 row first-car">
+				<select class="second-make">
+					<option>Please select a make</option>
+				</select>
+				<select class="second-model">
+					<option>Please select a model</option>
+				</select>
+				<select class="second-year">
+					<option>Please select a year</option>
+				</select>
+				<select class="second-style">
+					<option>Please select a style</option>
+				</select>
+
+			<!-- Second Template Container !-->
+
+			<div class="second-tempContainer">
+			</div>
+
+			<!-- Second Template !-->
+
+			<div class="templates hidden">
+					<div class="second-information">
+						<dl class="result car1">
+							<dt class="photo"></dt>
+							<dt>Make:</dt>
+								<dd class="second-make">Make</dd>
+							<dt>Model:</dt>
+								<dd class="second-model">Model</dd>
+							<dt>MPG: <br /></dt>
+								<dd><strong>City:</strong>
+									<p class="second-city">City</p>
+								</dd>
+								<dd><strong>Highway:</strong>
+									<p class="second-highway">Highway</p>
+								</dd>
+							<dt>Engine Information <br /></dt>
+								<dd><strong>Compression Rate:</strong> 
+									<p class="second-compression">Rate</p>
+								</dd>
+								<dd><strong>Cylinders:</strong>
+									<p class="second-cylinder">Cylinder</p>
+								</dd>
+								<dd><strong>Fuel:</strong>
+									<p class="second-fuel">Fuel type</p>
+								</dd>
+						</dl>
+					</div>
 		</div>
+
 	</div>
 
 </body>

@@ -26,3 +26,8 @@
 	margin-top: 2em;
 }
 
+.site-container{
+	border: 1px solid black;
+	padding: 5px;
+	margin: 1em 70px 1em 70px;
+}
