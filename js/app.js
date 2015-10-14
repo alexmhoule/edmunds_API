@@ -22,6 +22,16 @@ loadSecondMake();
 
 
 
+// LOADING GIF TEST
+
+ $(document).bind("ajaxSend", function(){
+   $("#loading-indicator").show();
+   $('.load-div').show();
+ }).bind("ajaxComplete", function(){
+   $("#loading-indicator").hide();
+   $('.load-div').hide();
+ });
+
 // FIRST VEHICLE
 
 	// AJAX CALLS
@@ -120,9 +130,15 @@ loadSecondMake();
 
 			var cityDisplay = result.find('.city');
 			cityDisplay.text(style.MPG.city);
+			if(style.MPG.city == null){
+				cityDisplay.text("N / A");
+			};
 
 			var highwayDisplay = result.find('.highway');
 			highwayDisplay.text(style.MPG.highway);
+			if(style.MPG.highway == null){
+				highwayDisplay.text("N / A");
+			};
 
 			//Engine Information Display
 
@@ -134,9 +150,15 @@ loadSecondMake();
 
 			var cylinderDisplay = result.find('.cylinder');
 			cylinderDisplay.text(style.engine.cylinder);
+			if(style.engine.cylinder == null){
+				cylinderDisplay.text("N / A");
+			};
 
 			var fuelDisplay = result.find('.fuel');
 			fuelDisplay.text(style.engine.fuelType);
+			if(style.engine.fuelType == null){
+				fuelDisplay.text("N / A");
+			};
 
 			$('.tempContainer').append(result);
 		}
@@ -297,9 +319,15 @@ loadSecondMake();
 
 			var cityDisplay = result.find('.second-city');
 			cityDisplay.text(style.MPG.city);
+			if(style.MPG.city == null){
+				cityDisplay.text("N / A");
+			};
 
 			var highwayDisplay = result.find('.second-highway');
 			highwayDisplay.text(style.MPG.highway);
+			if(style.MPG.highway == null){
+				highwayDisplay.text("N / A");
+			};
 
 			//Engine Information Display
 
@@ -311,9 +339,15 @@ loadSecondMake();
 
 			var cylinderDisplay = result.find('.second-cylinder');
 			cylinderDisplay.text(style.engine.cylinder);
+			if(style.engine.cylinder == null){
+				cylinderDisplay.text("N / A");
+			};
 
 			var fuelDisplay = result.find('.second-fuel');
 			fuelDisplay.text(style.engine.fuelType);
+			if(style.engine.fuelType == null){
+				fuelDisplay.text("N / A");
+			};
 
 			$('.second-tempContainer').append(result);
 		}
