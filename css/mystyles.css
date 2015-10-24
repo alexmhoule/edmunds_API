@@ -37,11 +37,19 @@
   width: 100px;
   height: 100px;
   left: 30rem;
-  top: 26rem;
+  top: 18rem;
 }
 
 #loading-indicator {
 	position: absolute;
 	left: 41px;
 	top: 41px;
+}
+
+.make {
+	display: none;
+}
+
+.second-make {
+	display: none;
 }
