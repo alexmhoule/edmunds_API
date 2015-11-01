@@ -18,12 +18,12 @@ var secondStyle;
 var second_make_niceName;
 var second_model_niceName;
 var second_year_niceName;
-$('.model').hide();
-$('.year').hide();
-$('.styles').hide();
-$('.second-model').hide();
-$('.second-year').hide();
-$('.second-style').hide();
+$('select.model').hide();
+$('select.year').hide();
+$('select.styles').hide();
+$('select.second-model').hide();
+$('select.second-year').hide();
+$('select.second-style').hide();
 loadMake('first');
 loadMake('second');
 
@@ -53,12 +53,12 @@ loadMake('second');
 
 				}
 				if (modelInidcator == 'first'){
-					$('.make').append(option);
+					$('select.make').append(option);
 					$('#loading-indicator').hide();
 					$('.load-div').hide();
 					$('.make').show();
 				}else {
-					$('.second-make').append(option);
+					$('select.second-make').append(option);
 					$('#loading-indicator').hide();
 					$('.load-div').hide();
 					$('.second-make').show();
@@ -78,13 +78,13 @@ loadMake('second');
 					$.each(models, function (index, value) {
 						option += '<option class="model-option" value="' + index + '">' + value.name + '</option>';
 					});
-					$('.model').append(option);
+					$('select.model').append(option);
 				}else{
 					secondModels = makes.models;
 					$.each(secondModels, function (index, value) {
 						option += '<option class="model-option" value="' + index + '">' + value.name + '</option>';
 					});
-					$('.second-model').append(option);
+					$('select.second-model').append(option);
 				}
 			}
 		}
@@ -99,13 +99,13 @@ loadMake('second');
 					$.each(years, function (index, value) {
 						option += '<option class="model-year" value="' + value.id + '">' + value.year + '</option>';
 					});
-					$('.year').append(option);
+					$('select.year').append(option);
 				}else{
 					secondYears = model.years;
 					$.each(secondYears, function (index, value) {
 						option += '<option class="model-year" value="' + value.id + '">' + value.year + '</option>';
 					});
-					$('.second-year').append(option);
+					$('select.second-year').append(option);
 				}
 			}
 		}
@@ -113,44 +113,42 @@ loadMake('second');
 		// STYLE
 
 		function loadStyles (styleDropDown) {
+			console.log(styleDropDown);
+			var url;
+			
+			if (styleDropDown == 'first'){
+				url = "https://api.edmunds.com/api/vehicle/v2/" + make_niceName + "/" + model_niceName + "/" + year_niceName + "/styles?view=full&fmt=json&api_key=chw6q5hh9fpbd36wjk9qk3cy";
+			}else{
+				url = "https://api.edmunds.com/api/vehicle/v2/" + second_make_niceName + "/" + second_model_niceName + "/" + second_year_niceName + "/styles?view=full&fmt=json&api_key=chw6q5hh9fpbd36wjk9qk3cy";
+			}
 
-		var url;
-		
-		if (styleDropDown == 'first'){
-			url = "https://api.edmunds.com/api/vehicle/v2/" + make_niceName + "/" + model_niceName + "/" + year_niceName + "/styles?view=full&fmt=json&api_key=chw6q5hh9fpbd36wjk9qk3cy";
-		}else{
-			url = "https://api.edmunds.com/api/vehicle/v2/" + second_make_niceName + "/" + second_model_niceName + "/" + second_year_niceName + "/styles?view=full&fmt=json&api_key=chw6q5hh9fpbd36wjk9qk3cy";
-		}
-
-		console.log(url);
+			console.log(url);
 
 			$.ajax({
 				url: url
 			}).done(function (results) {
+				console.log(results);
 				var option ='';
 				if(results.styles.length>0) {
-					if (styleDropDown == 'first'){
+					$.each(results.styles, function (index, value) {
+						option += '<option class="model-style" value="' + index + '">' + value.name + '</option>';
+					});
+					console.log(option);
+					if (styleDropDown == 'first') {
 						styles = results.styles;
-						$.each(styles, function (index, value) {
-							option += '<option class="model-style" value="' + index + '">' + value.name + '</option>';
-						});
 						$('.styles').append(option);
 					}else{
-						console.log(results);
 						secondStyles = results.styles;
-						$.each(secondStyles, function (index, value) {
-						option += '<option class="second-model-style" value="' + index + '">' + value.name + '</option>';
-						});
-				}
-					$('.second-style').append(option);
+						$('.second-style').append(option);
 					}
-				})
-			};
+				}
+			});
+		}	
 		
 
 		// VEHICLE INFORMATION
 
-		function loadDetails(style) {
+		function loadDetails(style, resultIdentifier) {
 
 			var result = $('.templates .information').clone();
 			var makeDisplay;
@@ -220,7 +218,14 @@ loadMake('second');
 				fuelDisplay.text(style.engine.fuelType);
 			}
 
-			$('.tempContainer').append(result);
+			result.addClass(resultIdentifier);
+
+			if(resultIdentifier == 'first') {
+				$('.tempContainer').append(result);
+			}else{
+				$('.second-tempContainer').append(result);
+			}
+		
 		}
 
 
@@ -229,12 +234,12 @@ loadMake('second');
 		// MAKE
 
 		$('.make').on("change", function(){
-			$('.model-option').remove();
-			$('.model-year').remove();
+			$('select.model .model-option').remove();
+			$('select.year .model-year').remove();
 			$('.year').hide();
-			$('.model-style').remove();
+			$('select.style .model-style').remove();
 			$('.styles').hide();
-			$('.tempContainer .information').remove();
+			$('.tempContainer .first').remove();
 			if ($(this).find("option:selected").index() == 0){
 				$('.model').hide();
 			}else {
@@ -248,10 +253,10 @@ loadMake('second');
 		// MODEL
 
 		$('.model').on("change", function() {
-			$('.model-year').remove();
-			$('.model-style').remove();
+			$('select.year .model-year').remove();
+			$('select.style .model-style').remove();
 			$('.styles').hide();
-			$('.tempContainer .information').remove();
+			$('.tempContainer .first').remove();
 			var modelIndex = $(this).find("option:selected").index()-1;
 			loadYears(models[modelIndex], 'first');
 			model_niceName = models[modelIndex].niceName;
@@ -261,8 +266,8 @@ loadMake('second');
 		// YEAR
 
 		$('.year').on("change", function() {
-			$('.model-style').remove();
-			$('.tempContainer .information').remove();
+			$('select.style .model-style').remove();
+			$('.tempContainer .first').remove();
 			var yearIndex = $(this).find("option:selected").index()-1;
 			year_niceName = years[yearIndex].year;
 			loadStyles('first');
@@ -274,7 +279,8 @@ loadMake('second');
 		$('.styles').on("change", function () {
 			var styleIndex = $(this).find("option:selected").index()-1;
 			style = styles[styleIndex], 'first';
-			loadDetails(style);
+			console.log(styles[styleIndex]);
+			loadDetails(style, 'first');
 		});
 
 
@@ -282,12 +288,12 @@ loadMake('second');
 // SECOND VEHICLE
 
 		$('.second-make').on("change", function(){
-			$('.second-model-option').remove();
-			$('.second-model-year').remove();
+			$('select.second-model .model-option').remove();
+			$('select.second-year .model-year').remove();
 			$('.second-year').hide();
-			$('.second-model-style').remove();
+			$('select.second-style .model-style').remove();
 			$('.second-style').hide();
-			$('.second-tempContainer .second-information').remove();
+			$('.second-tempContainer .second').remove();
 			if ($(this).find("option:selected").index() == 0){
 				$('.second-model').hide();
 			}else {
@@ -301,10 +307,10 @@ loadMake('second');
 		// MODEL
 
 		$('.second-model').on("change", function() {
-			$('.second-model-year').remove();
-			$('.second-model-style').remove();
+			$('select.second-year .model-year').remove();
+			$('select.second-style .model-style').remove();
 			$('.second-style').hide();
-			$('.second-tempContainer .second-information').remove();
+			$('.second-tempContainer .second').remove();
 			var modelIndex = $(this).find("option:selected").index()-1;
 			loadYears(secondModels[modelIndex], 'second');
 			second_model_niceName = secondModels[modelIndex].niceName;
@@ -314,8 +320,8 @@ loadMake('second');
 		// YEAR
 
 		$('.second-year').on("change", function() {
-			$('.second-model-style').remove();
-			$('.second-tempContainer .second-information').remove();
+			$('select.second-style .model-style').remove();
+			$('.second-tempContainer .second').remove();
 			var yearIndex = $(this).find("option:selected").index()-1;
 			second_year_niceName = secondYears[yearIndex].year;
 			loadStyles('second');
@@ -327,7 +333,7 @@ loadMake('second');
 		$('.second-style').on("change", function () {
 			var styleIndex = $(this).find("option:selected").index()-1;
 			secondStyle = secondStyles[styleIndex], 'second';
-			loadDetails(secondStyle);
+			loadDetails(secondStyle, 'second');
 		});
 
 });
