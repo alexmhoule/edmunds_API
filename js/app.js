@@ -113,7 +113,6 @@ loadMake('second');
 		// STYLE
 
 		function loadStyles (styleDropDown) {
-			console.log(styleDropDown);
 			var url;
 			
 			if (styleDropDown == 'first'){
@@ -127,13 +126,11 @@ loadMake('second');
 			$.ajax({
 				url: url
 			}).done(function (results) {
-				console.log(results);
 				var option ='';
 				if(results.styles.length>0) {
 					$.each(results.styles, function (index, value) {
 						option += '<option class="model-style" value="' + index + '">' + value.name + '</option>';
 					});
-					console.log(option);
 					if (styleDropDown == 'first') {
 						styles = results.styles;
 						$('.styles').append(option);
@@ -161,7 +158,6 @@ loadMake('second');
 
 				makeDisplay = result.find('.make');
 				modelDisplay = result.find('.model');
-				console.log(style);
 				cityDisplay = result.find('.city');
 				highwayDisplay = result.find('.highway');
 				compressionDisplay = result.find('.compression');
@@ -237,7 +233,7 @@ loadMake('second');
 			$('select.model .model-option').remove();
 			$('select.year .model-year').remove();
 			$('.year').hide();
-			$('select.style .model-style').remove();
+			$('select.styles .model-style').remove();
 			$('.styles').hide();
 			$('.tempContainer .first').remove();
 			if ($(this).find("option:selected").index() == 0){
@@ -254,7 +250,7 @@ loadMake('second');
 
 		$('.model').on("change", function() {
 			$('select.year .model-year').remove();
-			$('select.style .model-style').remove();
+			$('select.styles .model-style').remove();
 			$('.styles').hide();
 			$('.tempContainer .first').remove();
 			var modelIndex = $(this).find("option:selected").index()-1;
@@ -266,7 +262,7 @@ loadMake('second');
 		// YEAR
 
 		$('.year').on("change", function() {
-			$('select.style .model-style').remove();
+			$('select.styles .model-style').remove();
 			$('.tempContainer .first').remove();
 			var yearIndex = $(this).find("option:selected").index()-1;
 			year_niceName = years[yearIndex].year;
@@ -279,7 +275,6 @@ loadMake('second');
 		$('.styles').on("change", function () {
 			var styleIndex = $(this).find("option:selected").index()-1;
 			style = styles[styleIndex], 'first';
-			console.log(styles[styleIndex]);
 			loadDetails(style, 'first');
 		});
 
